@@ -8,4 +8,4 @@ My goal is to have fun and learn [Nim](https://nim-lang.org/). Since I know bett
 
 Task | Python solution | Nim solution | Note
 --- | --- | --- | ---
-[Day 1: Chronal Calibration](http://adventofcode.com/2018/day/1) |  |  | 
+[Day 1: Chronal Calibration](http://adventofcode.com/2018/day/1) | [day01.py](python/day01.py) | [day01.nim](nim/day01.nim) | Nim (python-naive) implementation unexpectedly much slower! Why?
