@@ -36,3 +36,9 @@ print(a, b, a*b)
 a, b = solve(ids)
 print(len(ids))
 print(a, b, a*b)
+
+# second part
+def distance(id1, id2):
+    return sum([0 if c1 == c2 else 1 for c1, c2 in zip(id1, id2)])
+
+print(distance("abcde", "axcye"))

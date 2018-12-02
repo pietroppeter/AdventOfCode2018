@@ -70,4 +70,17 @@ echo twos
 echo threes
 echo twos*threes
 
+# second part
 
+# distance bewteen ids
+var id1 : string
+var id2 : string
+var dist : int
+
+id1 = "abcde"
+id2 = "axcye"
+dist = 0
+for i in 0..<id1.len:
+  if id1[i] != id2[i]:
+    dist += 1
+echo dist
