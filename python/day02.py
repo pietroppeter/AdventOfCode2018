@@ -38,7 +38,17 @@ print(len(ids))
 print(a, b, a*b)
 
 # second part
+
+# distance bewteen ids
 def distance(id1, id2):
     return sum([0 if c1 == c2 else 1 for c1, c2 in zip(id1, id2)])
 
 print(distance("abcde", "axcye"))
+
+# cycle over all pairs of ids
+for i, id1 in enumerate(ids):
+    for id2 in ids[(i+1):]:
+        dist = distance(id1, id2)
+    if dist == 1:
+        break
+print(id1, id2)
