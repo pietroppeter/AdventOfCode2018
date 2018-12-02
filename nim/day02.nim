@@ -18,7 +18,7 @@ proc countChars(text : string) : CountTable[char] =
     echo result
 
 # this throws an error and I cannot understand why!
-echo countChars(test)
+# echo countChars(test)
 #[ output:
 {:}
 a
@@ -43,3 +43,31 @@ const ids = readFile("./inputs/02.txt").strip().splitLines()
 
 echo ids[0]
 # echo countChars(ids[0])
+
+var twos = 0
+var threes = 0
+var hasTwo : bool
+var hasThree : bool
+echo len ids
+for id in ids:
+    clear(counter)
+    # echo id
+    for c in id:
+      counter.inc(c)
+    # echo counter
+    hasTwo = false
+    hasThree = false
+    for k, v in counter:
+      if v == 2:
+        hasTwo = true
+      elif v == 3:
+        hasThree = true
+    if hasTwo:
+      twos += 1
+    if hasThree:
+      threes += 1
+echo twos
+echo threes
+echo twos*threes
+
+

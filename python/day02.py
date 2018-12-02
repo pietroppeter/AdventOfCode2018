@@ -1,12 +1,12 @@
 from collections import Counter
 
-with open('./inputs/01.txt') as f:
+with open('./inputs/02.txt') as f:
     ids = f.readlines()
 
 def count23(id):
     count = Counter(id)
-    exactly_two = bool({k for k in count if count[k] == 2})
-    exactly_three = bool({k for k in count if count[k] == 3})
+    exactly_two = bool({k for k, v in count.items() if v == 2})
+    exactly_three = bool({k for k, v in count.items() if v == 3})
     return exactly_two, exactly_three
 
 def solve(ids):
@@ -34,4 +34,5 @@ print(count23('bababc'))
 a, b = solve(test_ids)
 print(a, b, a*b)
 a, b = solve(ids)
+print(len(ids))
 print(a, b, a*b)
