@@ -49,6 +49,10 @@ print(distance("abcde", "axcye"))
 for i, id1 in enumerate(ids):
     for id2 in ids[(i+1):]:
         dist = distance(id1, id2)
+        if dist == 1:
+            break
     if dist == 1:
         break
-print(id1, id2)
+print(id1)
+print(id2)
+print(''.join([c for i, c in enumerate(id1) if id2[i] == c]))
