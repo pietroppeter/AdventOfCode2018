@@ -84,3 +84,22 @@ for i in 0..<id1.len:
   if id1[i] != id2[i]:
     dist += 1
 echo dist
+
+proc distance(a, b: string): int =
+  for i in 0..<a.len:
+    if a[i] != b[i]:
+      inc result
+
+echo distance("abcde", "axcye")
+
+# cycle over all pairs of ids
+for i in 0..<(ids.len - 1):
+  for j in (i+1)..<ids.len:
+    dist = distance(ids[i], ids[j])
+    if dist == 1:
+      id1 = ids[i]
+      id2 = ids[j]
+      break
+  if dist == 1: break
+echo id1
+echo id2
