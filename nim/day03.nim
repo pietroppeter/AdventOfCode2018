@@ -147,3 +147,57 @@ var santasTissue: Tissue[1000]
 for claim in elfClaims:
   santasTissue.add(initClaim(claim))
 echo santasTissue.countOverlaps()
+
+### second part
+
+# find non overlapping coordinates and lengths
+var my_x: int
+var my_y: int
+var found = false
+for x in 0 ..< santasTissue.len:
+  for y in 0 ..< santasTissue.len:
+    if santasTissue[x][y] == 1:
+      my_x = x
+      my_y = y
+      found = true
+      break # how do I break from two loops?
+  if found:
+    break
+echo my_x, " ", my_y
+
+var c: Claim
+for claim in elfClaims:
+  c = initClaim(claim)
+  if c.x == my_x and c.y == my_y:
+    echo c
+    break
+
+# find non overlapping id
+#[
+for claim in claims:
+    c = Claim(claim)
+    # if c.x == x and c.y == y and c.w == w and c.h == h:
+    if c.x == x and c.y == y:  # since it does not overlap I am guaranteed to find only one claim id
+        print(c.id)
+        break
+print(claim)
+]#
+
+# wrong answer.
+# let's go simpler. we reprocess all claims:
+found = false
+for claim in elfClaims:
+  c = initClaim(claim)
+  for w in 0 ..< c.w:
+    for h in 0 ..< c.h:
+      if santasTissue[c.x + w][c.y + h] == 1:
+        found = true
+      else:
+        found = false
+        break
+    if not found: break
+  if found:
+    echo c
+    break
+    # equivalent for list comprehension in nim?
+    #if all([grid[c.x + w][c.y + h] == 1 for w in range(c.w) for h in range(c.h)]):

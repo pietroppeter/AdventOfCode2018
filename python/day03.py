@@ -83,6 +83,7 @@ class Tissue:
                        for y in range(len(self.grid[x]))
                        if self.grid[x][y] > 1]
 
+
 # test tissue:
 tissue = Tissue()
 print(tissue)
@@ -142,3 +143,32 @@ for claim in claims:
 
 # finally I can output the number of contested square inches:
 print("overlapping square inches: ", len(tissue.overlap_coordinates()))
+
+### second part
+
+# find non overlapping coordinates and lengths
+grid = tissue.grid
+x, y = min([(x, y) for x in range(len(grid)) for y in range(len(grid[x])) if grid[x][y] == 1])
+print(x, y)
+# I do not atcually need to find w and h! The following formulas do not give me the correct w and h!
+w = max([w for w in range(1000 - x) if grid[x + w][y] == 1])
+h = max([h for h in range(1000 - y) if grid[x][y + h] == 1])
+print(w, h)
+# print(tissue)
+
+# find non overlapping id
+for claim in claims:
+    c = Claim(claim)
+    # if c.x == x and c.y == y and c.w == w and c.h == h:
+    if c.x == x and c.y == y:  # since it does not overlap I am guaranteed to find only one claim id
+        print(c.id)
+        break
+print(claim)
+
+# wrong answer.
+# let's go simpler. we reprocess all claims:
+for claim in claims:
+    c = Claim(claim)
+    if all([grid[c.x + w][c.y + h] == 1 for w in range(c.w) for h in range(c.h)]):
+        print(c)
+        break
