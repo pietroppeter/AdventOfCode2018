@@ -111,3 +111,17 @@ const input = sorted(readFile("./inputs/04.txt").strip().splitLines(), system.cm
 
 guards = process(input)
 solve(guards)
+
+# part 2
+var idBest, minuteBest, asleepTimes: int
+for id, minutes in guards:
+  for i in minutes.low .. minutes.high:
+    if minutes[i] > asleepTimes:
+      idBest = id
+      minuteBest = i
+      asleepTimes = minutes[i]
+
+echo "best guard: ", idBest
+echo "best minute: ", minuteBest
+echo "thier product: ", idBest*minuteBest
+# this is correct while the python version is not!
