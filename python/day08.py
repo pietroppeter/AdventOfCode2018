@@ -13,8 +13,10 @@ class node:
         for _ in range(self.num_meta):
             self.meta.append(sequence.pop())
 
-    def __repr__(self, tab=0):
-        text = f"{tab*'  '}Node(num_children={self.num_children}, num_meta={self.meta}, meta={self.meta})"
+    def __repr__(self, tab=0, deep=True):
+        text = f"{tab*'  '}Node(num_children={self.num_children}, num_meta={self.num_meta}, meta={self.meta})"
+        if not deep:
+            return text
         tab += 1
         for child in self.children:
             text += f"\n{child.__repr__(tab)}"
@@ -25,6 +27,17 @@ class node:
         for child in self.children:
             sum_metas += child.sum_metas()
         return sum_metas
+    
+    def value(self):
+        # print(self.__repr__(deep=False))
+        if self.num_children == 0:
+            return sum(self.meta)
+        value = 0
+        for m in self.meta:
+            if 0 < m <= len(self.children):
+                value += self.children[m-1].value()
+        return value
+
     # def __iter__(self):
     #     return self
     
@@ -42,6 +55,7 @@ print(root)
 
 # summing all metas
 print(root.sum_metas())
+print(root.value())  # part 2
 
 # real case
 # real case:
@@ -52,3 +66,4 @@ sequence.reverse()
 sequence = list(map(lambda x: int(x), sequence))
 root = node(sequence)
 print(root.sum_metas())
+print(root.value())  # part 2
