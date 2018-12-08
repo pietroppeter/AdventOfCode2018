@@ -40,7 +40,7 @@ sequence = solve(nodes, arrows)
 print(''.join(sequence))    
 
 # real case:
-with open('./inputs/05.txt') as f:
+with open('./inputs/07.txt') as f:
     input = f.read()
 
 nodes, arrows = process(input)

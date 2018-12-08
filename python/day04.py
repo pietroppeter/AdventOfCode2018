@@ -131,3 +131,9 @@ minutes = guards[guard_id].minutes
 minute_max_asleep = max(range(len(minutes)), key=minutes.__getitem__)
 print("Minute most asleep for guard", guard_id, ":", minute_max_asleep)
 print("Solution: ", int(guard_id)*minute_max_asleep)
+
+# part 2
+best_minute_by_guard = {id: max(range(len(guard.minutes)), key=guard.minutes.__getitem__) for id, guard in guards.items()}
+best_guard = max(best_minute_by_guard, key=best_minute_by_guard.get)
+best_minute = best_minute_by_guard[best_guard]
+print("best guard: ", best_guard, "; its best minute: ", best_minute, "; their product: ", int(best_guard)*best_minute)
