@@ -1,4 +1,18 @@
 import itertools
+import time
+
+# I want to use the memoize pattern (instead of setting up a grid) - to see how it changes and if it is possible in Nim:
+def memoize(func):
+    cache = dict()
+
+    def memoized_func(*args):
+        if args in cache:
+            return cache[args]
+        result = func(*args)
+        cache[args] = result
+        return result
+
+    return memoized_func
 
 print("tests")
 # serial 8
@@ -16,6 +30,7 @@ print(hundred_digit(123))
 print(hundred_digit(43210))
 print(hundred_digit(4321))
 
+@memoize  # comment this line to have results without memoize
 def power_level(x, y, serial):
     rack_id = x + 10
     return hundred_digit((rack_id*y + serial)*rack_id) - 5
@@ -51,7 +66,7 @@ def square_total_power(x, y, serial):
 
 def example_plot(xs, ys, serial):
     print('\n'.join([''.join([f"{power_level(x, y, serial):4}" for x in range(xs - 1, xs - 1 + 5)]) for y in range(ys - 1, ys - 1 + 5)]))
-    print(square_total_power(xs, ys, serial))
+    print(square_total_power(xs, ys, serial), xs, ys)
 
 example_plot(33, 45, 18)
 example_plot(21, 61, 42)
@@ -72,17 +87,10 @@ print(solve(42, size=70))
 print(solve(42, size=63))
 
 my_serial = 1309
-print("part 1 solution:", solve(my_serial))
+start = time.time()
+print("\npart 1 solution:", solve(my_serial))
+print("time taken: ", time.time() - start)
+# a bit more than 1 second without memoize
+# a bit less than 1 second with memoize
+# I expected more of an improvement, but I guess that the function I am caching is already pretty fast
 
-# I want to use the memoize pattern (instead of setting up a grid) - to see how it changes and if it is possible in Nim:
-def memoize(func):
-    cache = dict()
-
-    def memoized_func(*args):
-        if args in cache:
-            return cache[args]
-        result = func(*args)
-        cache[args] = result
-        return result
-
-    return memoized_func
